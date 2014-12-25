@@ -1,0 +1,13 @@
+*.py[c,o]
+*~
+*.db
+env
+django_request.log*
+http-access.log*
+http-error.log*
+mylog.log*
+CACHE
+media
+MAIN_*
+_MAIN_*
+*.orig

@@ -1,0 +1,6 @@
+{{ object.email }}
+{{ object.name }}
+{{ object.office }}
+{{ object.mtel }}
+{{ object.post }}
+{{ object.subdiv }}

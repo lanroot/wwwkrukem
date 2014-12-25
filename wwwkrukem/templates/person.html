@@ -1,0 +1,35 @@
+{% extends "feature.html" %}
+
+{% block content %}
+
+<div id="center"><h3>{{ div.name }} (г.{{ city.name }})</h3>
+    <h4>Код города: {{ city.ccode }}. Код меридиана:{{ div.mcode }}</h4>
+</div>
+<div id="person">
+<table align="center">
+  <tbody>
+    <tr>
+      <th>ФИО</th>
+      <th>E-mail</th>
+      <th>Тел.Меридиан</th>
+      <th>Тел.Городской</th>
+      <th>Тел.Сотовый</th>
+      <th>Кабинет</th>
+      <th>Подразделение</th>
+      <th>Должность</th>
+    </tr>
+    <tr>
+      <td>{{ person.name }}</td>
+      <td><a href="mailto:{{ person.email }}">{{ person.email }}</a></td>
+      <td>{{ person.mtel }}</td>
+      <td>{{ person.gtel }}</td>
+      <td>{{ person.stel }}</td>
+      <td>{{ person.office }}</td>
+      <td>{{ person.subdiv }}</td>
+      <td>{{ person.post }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

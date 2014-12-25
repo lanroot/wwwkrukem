@@ -1,0 +1,13 @@
+{% extends "feature.html" %}
+
+{% block content %}
+
+<h3>Persons</h3>
+{% for person in persons %}
+<div>
+    <h4><a href="/userdir/get/{{ person.pers_id }}/">{{ person.name }} {{ person.email }}</a></h4>
+</div>
+{% endfor %}
+
+{% endblock %}
+
