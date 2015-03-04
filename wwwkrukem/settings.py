@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '#03t!wc!$hm604^op!9oofv_o8o&ljeq!oy8qdfl03k-q5pi-&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -200,7 +200,7 @@ CMS_PLACEHOLDER_CONF = {}
 
 DATABASES = {
     'default':
-        {'ENGINE': 'django.db.backends.mysql', 'NAME': u'django_cms-2014-Dec-09', 'HOST': u'localhost', 'USER': '', 'PASSWORD': '', 'PORT': ''}
+        {'ENGINE': 'django.db.backends.mysql', 'NAME': u'django_cms-2014-Dec-09', 'HOST': u'localhost', 'USER': 'lan', 'PASSWORD': '', 'PORT': ''}
 }
 
 

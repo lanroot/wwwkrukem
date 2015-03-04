@@ -11,3 +11,5 @@ media
 MAIN_*
 _MAIN_*
 *.orig
+*.back
+settings.py
