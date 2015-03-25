@@ -13,3 +13,4 @@ _MAIN_*
 *.orig
 *.back
 settings.py
+wsgi.py
