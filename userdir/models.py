@@ -2,36 +2,10 @@ import datetime
 from django.db import models
 
 # Create your models here.
-class Person(models.Model):
-    pers_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-    gtel = models.CharField(max_length=32, blank=True)
-    mtel = models.CharField(max_length=32, blank=True)
-    stel = models.CharField(max_length=32, blank=True)
-    fax = models.CharField(max_length=32, blank=True)
-    email = models.EmailField()
-    post = models.CharField(max_length=255, blank=True)
-    office = models.CharField(max_length=255, blank=True)
-    subdiv = models.CharField(max_length=255, blank=True)
-    visible = models.SmallIntegerField()
-    active = models.SmallIntegerField()
-    div_id = models.IntegerField()
-    last_update = models.DateTimeField(default=datetime.datetime.now, auto_now_add=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return "/userdir/get/%i" % self.pers_id
-
-    class Meta:
-        db_table = u'persons'
-        ordering = ['name']
-
 class City(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-    ccode = models.CharField(max_length=32)
+    name = models.CharField(max_length=255, help_text='City Name')
+    ccode = models.CharField(max_length=32, help_text='City Phone Prefix')
 
     def __unicode__(self):
         return self.name
@@ -43,15 +17,45 @@ class City(models.Model):
 class Div(models.Model):
     id = models.IntegerField(primary_key=True)
     code = models.CharField(max_length=32)
-    mcode = models.CharField(max_length=8)
-    name = models.CharField(max_length=255)
-    domain = models.CharField(max_length=128)
-    city_id = models.IntegerField()
-    pri = models.SmallIntegerField()
-    addr_pref = models.CharField(max_length=9)
+    mcode = models.CharField(max_length=8, help_text='Meridian Prefix')
+    name = models.CharField(max_length=255, help_text='Division Name')
+    domain = models.CharField(max_length=128, help_text='E-mail Domain')
+#    city_id = models.IntegerField()
+    city = models.ForeignKey(City)
+    pri = models.SmallIntegerField(help_text='Priority Code')
+    addr_pref = models.CharField(max_length=9, help_text='IP Address Prefix')
 
     def __unicode__(self):
         return self.name
 
     class Meta:
         db_table = u'divs'
+        ordering = ['-pri']
+
+class Person(models.Model):
+    pers_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, help_text='Full Name (last, first, middle)')
+    gtel = models.CharField(max_length=32, blank=True, help_text='City Phone Number')
+    mtel = models.CharField(max_length=32, blank=True, verbose_name='meridian', help_text='Meridian Phone Number')
+    stel = models.CharField(max_length=32, blank=True, help_text='Mobile Phone Number')
+    fax = models.CharField(max_length=32, blank=True, help_text='Fax Phone Number')
+    email = models.EmailField(verbose_name='e-mail')
+    post = models.CharField(max_length=255, blank=True, help_text='Job Title')
+    office = models.CharField(max_length=255, blank=True, help_text='Room Number')
+    subdiv = models.CharField(max_length=255, blank=True)
+    visible = models.SmallIntegerField(default=1)
+    active = models.SmallIntegerField(default=1)
+#    div_id = models.IntegerField()
+    div = models.ForeignKey(Div)
+    last_update = models.DateTimeField(default=datetime.datetime.now, auto_now_add=True)
+#    pri = models.ForeignKey(Div)
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return "/userdir/get/%i" % self.pers_id
+
+    class Meta:
+        db_table = u'persons'
+        ordering = ['div', 'name']

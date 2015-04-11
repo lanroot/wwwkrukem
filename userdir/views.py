@@ -8,17 +8,20 @@ from haystack.query import SearchQuerySet
 from userdir.models import Person, City, Div
 
 import json
+import logging
 
-#def persons(request):
-#
-#    args = {}
-#    args.update(csrf(request))
-#
-#    args['persons'] = Person.objects.filter(visible=1)
-#
-#    return render_to_response('persons.html',
-#            RequestContext(request, args)
-#            )
+logr = logging.getLogger(__name__)
+
+def persons(request):
+
+    args = {}
+    args.update(csrf(request))
+
+    args['persons'] = Person.objects.filter(visible=1)
+
+    return render_to_response('persons.html',
+            RequestContext(request, args)
+            )
 
 def person(request, person_id=1):
     div_id = Person.objects.get(pers_id=person_id).div_id
@@ -32,9 +35,24 @@ def person(request, person_id=1):
                             )
             )
 
+def search_persons(request):
+#    if request.method == "POST":
+#        search_text = request.POST['search_text']
+#    else:
+#        search_text = ''
+    search_text = request.GET['sh']
+
+    args = {}
+    args.update(csrf(request))
+
+    args['persons'] = Person.objects.filter(visible=1, email__icontains=search_text)
+    logr.debug(persons)
+
+    return render_to_response('persons.html', RequestContext(request, args))
+
 def autocomplete(request):
-    if request.method == "POST":
-        return HttpResponseRedirect('/userdir/get/%s' % request.POST['q'])
+#    if request.method == "POST":
+#        return HttpResponseRedirect('/userdir/get/%s' % request.POST['q'])
 
     sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', ''))[:15]
     suggestions = [{'label': (result.name, result.email), 'value': result.pers_id} for result in sqs]
