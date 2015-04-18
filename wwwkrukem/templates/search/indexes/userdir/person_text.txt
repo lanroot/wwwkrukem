@@ -1,3 +1,5 @@
+{{ object.div.pri }}
+{{ object.div.name }}
 {{ object.email }}
 {{ object.name }}
 {{ object.office }}

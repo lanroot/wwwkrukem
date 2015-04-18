@@ -45,7 +45,15 @@ def search_persons(request):
     args = {}
     args.update(csrf(request))
 
-    args['persons'] = Person.objects.filter(visible=1, email__icontains=search_text)
+#    args['persons'] = Person.objects.filter(visible=1, email__icontains=search_text)
+    args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text))
+#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('-pri')[:100]
+#    args['persons'] = SearchQuerySet().autocomplete(content_auto=search_text).order_by('-pri')[:100]
+#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('div')[:100]
+#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', ''))[:100]
+#    args['persons'] = SearchQuerySet().filter(content=search_text).order_by('-pri')[:100]
+#    args['persons'] = SearchQuerySet().auto_query(search_text)
+#    args['person'] = SearchQuerySet().models(Person).order_by('-pri').filter(content=search_text)[:100]
     logr.debug(persons)
 
     return render_to_response('persons.html', RequestContext(request, args))
