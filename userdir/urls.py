@@ -6,5 +6,5 @@ urlpatterns = patterns('',
 #    url(r'^search/$', 'userdir.views.autocomplete'),
     url(r'^search/autocomplete/$', 'userdir.views.autocomplete'),
     url(r'^search_persons/$', 'userdir.views.search_persons'),
-    url(r'^search.php$', 'userdir.views.search_persons'),
+    url(r'^search.php$', 'userdir.views.search_persons_cp1251'),
 )

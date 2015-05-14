@@ -9,6 +9,7 @@ from userdir.models import Person, City, Div
 
 import json
 import logging
+import urllib
 
 logr = logging.getLogger(__name__)
 
@@ -35,6 +36,20 @@ def person(request, person_id=1):
                             )
             )
 
+def search_persons_cp1251(request):
+
+    request.encoding = 'cp1251'
+    search_text = request.GET['sh']
+
+    args = {}
+    args.update(csrf(request))
+
+    args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text))
+
+    logr.debug(persons)
+
+    return render_to_response('persons.html', RequestContext(request, args))
+
 def search_persons(request):
 #    if request.method == "POST":
 #        search_text = request.POST['search_text']
@@ -45,7 +60,6 @@ def search_persons(request):
     args = {}
     args.update(csrf(request))
 
-#    args['persons'] = Person.objects.filter(visible=1, email__icontains=search_text)
     args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text))
 #    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('-pri')[:100]
 #    args['persons'] = SearchQuerySet().autocomplete(content_auto=search_text).order_by('-pri')[:100]
