@@ -70,6 +70,8 @@ def search_persons(request):
 #    args['person'] = SearchQuerySet().models(Person).order_by('-pri').filter(content=search_text)[:100]
     logr.debug(persons)
 
+    args['search_text'] = search_text
+
     return render_to_response('persons.html', RequestContext(request, args))
 
 def autocomplete(request):
