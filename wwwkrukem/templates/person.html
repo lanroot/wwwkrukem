@@ -21,12 +21,12 @@
     <tr>
       <td>{{ person.name }}</td>
       <td><a href="mailto:{{ person.email }}">{{ person.email }}</a></td>
-      <td>{{ person.mtel }}</td>
-      <td>{{ person.gtel }}</td>
-      <td>{{ person.stel }}</td>
-      <td>{{ person.office }}</td>
-      <td>{{ person.subdiv }}</td>
-      <td>{{ person.post }}</td>
+      <td>{{ person.mtel |default_if_none:"" }}</td>
+      <td>{{ person.gtel |default_if_none:"" }}</td>
+      <td>{{ person.stel |default_if_none:"" }}</td>
+      <td>{{ person.office |default_if_none:"" }}</td>
+      <td>{{ person.subdiv |default_if_none:"" }}</td>
+      <td>{{ person.post |default_if_none:"" }}</td>
     </tr>
   </tbody>
 </table>
