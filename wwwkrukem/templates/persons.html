@@ -10,7 +10,7 @@
   {% regroup persons by div as person_div_list %}
   <ul>
   {% for t in person_div_list %}
-    <li><h4>{{ t.grouper }}</h4>
+    <li><h4>{{ t.grouper }}  (код меридиана: {{ t.grouper.mcode }})</h4>
     <ul>
     {% for item in t.list %}
       <div id="person" style="text-align: left">
