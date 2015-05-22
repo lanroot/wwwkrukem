@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 #from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,6 +13,13 @@ import logging
 import urllib
 
 logr = logging.getLogger(__name__)
+
+_eng_chars = u"~!@$%^&qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"|ZXCVBNM<>?"
+_rus_chars = u"ё!\";%:?йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,"
+_trans_table = dict(zip(_eng_chars, _rus_chars))
+ 
+def fix_layout(s):
+    return u''.join([_trans_table.get(c, c) for c in s])
 
 def persons(request):
 
@@ -56,11 +64,12 @@ def search_persons(request):
 #    else:
 #        search_text = ''
     search_text = request.GET['sh']
+    search_text_wrong_layout = fix_layout(search_text)
 
     args = {}
     args.update(csrf(request))
 
-    args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text))
+    args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text) | Q(name__icontains=search_text_wrong_layout))
 #    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('-pri')[:100]
 #    args['persons'] = SearchQuerySet().autocomplete(content_auto=search_text).order_by('-pri')[:100]
 #    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('div')[:100]
