@@ -9,9 +9,11 @@ $(document).ready(function() {
                 success: function(data) {
                     response(data);
                 },
+                /*
                 error: function(data, textStatus) {
                     alert(data.statusText);
                 }
+                */
             });
         },
         minLength: 3,
