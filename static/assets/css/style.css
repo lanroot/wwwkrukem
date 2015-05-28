@@ -8,9 +8,7 @@
 }
 
 .well {
-    padding: 19px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 4px 19px 0px;
 }
 
 h2 small, h2 .small {
