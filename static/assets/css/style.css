@@ -19,3 +19,15 @@ h2 small, h2 .small {
 .page-header {
     padding-bottom: 1px;
 }
+
+.entry-tags {
+    margin: 0 0 2px;
+}
+
+.entry-shorturl {
+    margin: 0 0 2px;
+}
+
+.entry-discussions {
+    margin: 0 0 2px;
+}
