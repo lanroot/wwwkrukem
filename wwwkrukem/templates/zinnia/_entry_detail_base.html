@@ -34,6 +34,9 @@
         {% endblock entry-authors %}
         {% block entry-published %}
         <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATETIME_FORMAT" }}</time>
+        {% comment %}
+        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"j N Y, P" }}</time>
+        {% endcomment %}
         {% endblock entry-published %}
         {% block entry-categories %}
         {% with categories=object.categories.all %}
