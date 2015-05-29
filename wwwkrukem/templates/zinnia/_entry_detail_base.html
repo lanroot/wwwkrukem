@@ -51,14 +51,13 @@
       </small>
     </h2>
     {% endblock entry-info %}
-    {% block entry-last-update %}
     {% comment %}
-    <p class="entry-last-update" style="display: none;">
-    {% endcomment %}
+    {% block entry-last-update %}
     <p class="entry-last-update" style="display: none;">
       {% trans "Last update on" %} <time class="updated" datetime="{{ object.last_update|date:"c" }}">{{ object.last_update|date:"DATETIME_FORMAT" }}</time>.
     </p>
     {% endblock entry-last-update %}
+    {% endcomment %}
   </header>
   {% endblock entry-header %}
 
