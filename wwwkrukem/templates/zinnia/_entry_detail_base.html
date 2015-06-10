@@ -33,16 +33,12 @@
         {% endwith %}
         {% endblock entry-authors %}
         {% block entry-published %}
-        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATE_FORMAT" }} {{ object.creation_date|date:"SHORT_TIME_FORMAT" }}</time>
-        {% comment %}
-        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATETIME_FORMAT" }}</time>
-        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"j N Y, P" }}</time>
-        {% endcomment %}
+        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATE_FORMAT" }} в {{ object.creation_date|date:"SHORT_TIME_FORMAT" }}</time>
         {% endblock entry-published %}
         {% block entry-categories %}
         {% with categories=object.categories.all %}
         {% if categories|length %}
-        {% trans "in" %}
+        {% trans "в разделе" %}
         {% for category in categories %}
         <a href="{{ category.get_absolute_url }}"
            title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
