@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 import datetime
 from django.db import models
 
@@ -32,6 +33,7 @@ class Div(models.Model):
         db_table = u'divs'
         ordering = ['-pri']
 
+
 class Person(models.Model):
     pers_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, help_text='Full Name (last, first, middle)')
@@ -49,6 +51,12 @@ class Person(models.Model):
     div = models.ForeignKey(Div)
     last_update = models.DateTimeField(default=datetime.datetime.now, auto_now_add=True)
 #    pri = models.ForeignKey(Div)
+
+    def do_wrong_layout(self):
+         _eng_chars = u"~!@$%^&qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"|ZXCVBNM<>?"
+         _rus_chars = u"ё!\";%:?йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,"
+         _do_wrong_table = dict(zip(_rus_chars, _eng_chars))
+         return u''.join([_do_wrong_table.get(c, c) for c in self.name])
 
     def __unicode__(self):
         return self.name
