@@ -33,8 +33,9 @@
         {% endwith %}
         {% endblock entry-authors %}
         {% block entry-published %}
-        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATETIME_FORMAT" }}</time>
+        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATE_FORMAT" }} {{ object.creation_date|date:"SHORT_TIME_FORMAT" }}</time>
         {% comment %}
+        <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"DATETIME_FORMAT" }}</time>
         <time class="published" datetime="{{ object.creation_date|date:"c" }}" pubdate="pubdate">{{ object.creation_date|date:"j N Y, P" }}</time>
         {% endcomment %}
         {% endblock entry-published %}
