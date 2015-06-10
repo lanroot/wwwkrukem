@@ -2,7 +2,7 @@
 {% regroup archives by year as year_list %}
 <ul class="{% if not archives %}no-{% endif %}archives-entries-tree">
   {% for year in year_list %}
-    {% if year.grouper = 2015 %}
+    {% if forloop.last %}
       <li>
         <a title="{% trans "Archives" %} {{ year.grouper }}" rel="archives"
            href="{% url 'zinnia:entry_archive_year' year.grouper %}">{{ year.grouper }}</a>
