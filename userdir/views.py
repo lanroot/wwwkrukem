@@ -1,5 +1,4 @@
 # -*- coding: utf8 -*-
-#from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -59,10 +58,7 @@ def search_persons_cp1251(request):
     return render_to_response('persons.html', RequestContext(request, args))
 
 def search_persons(request):
-#    if request.method == "POST":
-#        search_text = request.POST['search_text']
-#    else:
-#        search_text = ''
+
     search_text = request.GET['sh']
     search_text_wrong_layout = fix_layout(search_text)
 
@@ -70,13 +66,6 @@ def search_persons(request):
     args.update(csrf(request))
 
     args['persons'] = Person.objects.filter(Q(visible=1), Q(email__icontains=search_text) | Q(name__icontains=search_text) | Q(mtel__icontains=search_text)| Q(office__contains=search_text) | Q(post__icontains=search_text) | Q(subdiv__icontains=search_text) | Q(name__icontains=search_text_wrong_layout))
-#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('-pri')[:100]
-#    args['persons'] = SearchQuerySet().autocomplete(content_auto=search_text).order_by('-pri')[:100]
-#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', '')).order_by('div')[:100]
-#    args['persons'] = SearchQuerySet().autocomplete(content_auto=request.GET.get('sh', ''))[:100]
-#    args['persons'] = SearchQuerySet().filter(content=search_text).order_by('-pri')[:100]
-#    args['persons'] = SearchQuerySet().auto_query(search_text)
-#    args['person'] = SearchQuerySet().models(Person).order_by('-pri').filter(content=search_text)[:100]
     logr.debug(persons)
 
     args['search_text'] = search_text
@@ -84,8 +73,6 @@ def search_persons(request):
     return render_to_response('persons.html', RequestContext(request, args))
 
 def autocomplete(request):
-#    if request.method == "POST":
-#        return HttpResponseRedirect('/userdir/get/%s' % request.POST['q'])
 
     sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', ''))[:15]
     suggestions = [{'label': (result.name, result.email), 'value': result.pers_id} for result in sqs]
