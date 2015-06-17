@@ -1,6 +1,6 @@
 {% load i18n poll_tags %}
 
-<h4>{% trans "Результаты голосования" %}</h4>
+<h5><b>{% trans "Результаты голосования:" %}</b></h5>
 
 {% if messages %}
 <div class="messages">
@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 
-<h3>{{ poll.question }}</h3>
+<h4>{{ poll.question }}</h4>
 <ul>
   {% for choice in poll.choice_set.iterator %}
   <li>

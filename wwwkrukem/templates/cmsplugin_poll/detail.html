@@ -38,8 +38,8 @@
 
   {% else %}
 
-    <h4>{% trans "Голосование" %}</h4>
-    <h3>{{ poll.question }}</h3>
+    <h5><b>{% trans "Голосование:" %}</b></h5>
+    <h4>{{ poll.question }}</h4>
 
     {% if messages %}
       <div class="messages">
@@ -64,7 +64,7 @@
       <input type="submit" value='{% trans "Голосовать" %}' />
     </form>
     <span class="info">
-      {% trans 'Пожалуйста проголосуйте, <p>чтобы увидеть результаты опроса' %}
+      {% trans 'Пожалуйста проголосуйте, <p>чтобы увидеть результаты опроса, (результаты доступны через 5 мин.)' %}
     </span>
   {% endif %}
 </div>
