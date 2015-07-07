@@ -34,9 +34,9 @@
           <table width="100%">
             <tr>
               <td>
-           <form method="get" action="/ru/userdir/search_persons/">
-               <input class="btn btn-default"  type="submit" value="Поиск в справочнике:">
-               <input type="text" id="id_q" name="sh" value="{{ search_text }}" placeholder="E-mail, ФИО, и т.д.">
+           <form class="form-inline" role="form" method="get" action="/ru/userdir/search_persons/">
+               <button class="btn btn-default" type="submit" value="Поиск в справочнике:">Поиск в справочнике:</button>
+               <input class="input-medium form-control" style="width:50%" type="text" id="id_q" name="sh" value="{{ search_text }}" placeholder="E-mail, ФИО, и т.д.">
            </form>
              </td>
               <td>
