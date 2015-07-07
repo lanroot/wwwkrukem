@@ -1,17 +1,21 @@
-{% extends "zinnia:zinnia/tag_list.html" %}
+{% extends "zinnia/base.html" %}
 {% load i18n %}
 
-{% block content %}
-<h2>{% trans "Tag list" %}</h2>
+{% block meta-description %}{% trans "Tag list" %}{% endblock meta-description %}
 
-<ul class="list-group">
+{% block title %}{% trans "Tags" %}{% endblock title %}
+
+{% block body-class %}tag-list{% endblock body-class %}
+
+{% block content %}
+<h1>{% trans "Tag list" %}</h1>
+
+<ul>
   {% for object in object_list %}
-  <li class="list-group-item">
+  <li>
     <a href="{% url 'zinnia:tag_detail' object %}"
        title="{% blocktrans with tag=object %}Show all entries tagged by {{ tag }}{% endblocktrans %}">{{ object }}</a>
-    <span class="badge">
-      {% blocktrans count entry_count=object.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    </span>
+    {% blocktrans count entry_count=object.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   </li>
   {% empty %}
   <li>
